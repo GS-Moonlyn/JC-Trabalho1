@@ -1,12 +1,23 @@
 package t1;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
 import java.util.concurrent.Semaphore;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		int nRodadas = 2;
+		int nRodadas = 1;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Insira o numero de Rodadas:");
+			try {
+				nRodadas = sc.nextInt();
+			} catch (InputMismatchException e) {
+				// TODO: handle exception
+				System.out.println("Input invalido. Jogando apenas 1 rodada...");
+			}
+		
 		int rodadaAtual = 0;
 		
 		Semaphore semaphore = new Semaphore(1);

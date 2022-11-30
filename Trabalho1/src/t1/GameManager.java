@@ -12,7 +12,7 @@ public class GameManager {
 	
 	public void rpsSystem(int i) {
 		
-		System.out.println("Rodada " + (i + 1) + ":");
+		System.out.println("----" + " RODADA " + (i + 1) + "----");
 		
 		if(j1.jogadas[i] == j2.jogadas[i]) {
 			
