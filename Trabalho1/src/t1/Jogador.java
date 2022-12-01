@@ -18,7 +18,6 @@ public class Jogador extends Thread {
 		this.nRodadas = nRodadas;
 	}
 	
-	
 	public void run() {
 		try {
 				semaphore.acquire();
@@ -39,7 +38,6 @@ public class Jogador extends Thread {
 			} else {
 					jogadas[i] = "Scissors";
 			}
-		
 		}
 		semaphore.release();
 	}	

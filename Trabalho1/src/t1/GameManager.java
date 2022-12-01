@@ -1,13 +1,24 @@
 package t1;
 
-public class GameManager {
+public class GameManager extends Thread{
 	
 	private Jogador j1;
 	private Jogador j2;
+	private int rodadas;
 
-	public GameManager(Jogador j1, Jogador j2) {
+	public GameManager(Jogador j1, Jogador j2, int rodadas) {
 		this.j1 = j1;
 		this.j2 = j2;
+		this.rodadas = rodadas;
+	}
+	
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		super.run();	
+		for(int r = 0; r < rodadas; r++) {
+			rpsSystem(r);
+		}
 	}
 	
 	public void rpsSystem(int i) {

@@ -10,6 +10,7 @@ public class Main {
 
 		int nRodadas = 1;
 		Scanner sc = new Scanner(System.in);
+		Thread[] threads = new Thread[3];
 		System.out.println("Insira o numero de Rodadas:");
 			try {
 				nRodadas = sc.nextInt();
@@ -25,23 +26,24 @@ public class Main {
 		Jogador jogador1 = new Jogador("Jogador 1", semaphore, nRodadas);
 		Jogador jogador2 = new Jogador("Jogador 2", semaphore, nRodadas);
 		
-		GameManager gameManager = new GameManager(jogador1, jogador2);
-	
-		jogador1.start();
-		jogador2.start();
+		GameManager gameManager = new GameManager(jogador1, jogador2, nRodadas);
 		
-		while(jogador1.isAlive() || jogador2.isAlive()) {
-				
-		}
+		threads[0] = jogador1;
+		threads[1] = jogador2;
+		threads[2] = gameManager;
 		
 		System.out.println("-------- INICIO DE JOGO --------");
-		while(nRodadas != 0) {
-			gameManager.rpsSystem(rodadaAtual);
-			nRodadas--;
-			rodadaAtual++;
-		}
 		
-		if(nRodadas == 0) {
+		for(int i = 0; i < threads.length; i++) {
+			threads[i].start();	
+			try {
+				threads[i].join();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}	
+		
+		if(!gameManager.isAlive()) {
 			System.out.println("-------- FIM DE JOGO --------");
 			System.out.println("Placar Final: ");
 			System.out.println(jogador1.nome + ":" + " " + jogador1.score);
